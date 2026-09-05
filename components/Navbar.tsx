@@ -26,14 +26,17 @@ export default function Navbar() {
       <nav id="navbar">
         <div className="nav-wrapper">
           <a href="#welcome-section" className="brand">
-            <Image
-              src="/logo.png"
-              alt="AlaCode"
-              width={40}
-              height={40}
-              className="brand-logo"
-              priority
-            />
+            <span className="brand-logo-wrap">
+              <Image
+                src="/logo.png"
+                alt="AlaCode"
+                width={40}
+                height={40}
+                className="brand-logo"
+                priority
+                unoptimized
+              />
+            </span>
             <span className="brand-text">AlaCode</span>
           </a>
           <button

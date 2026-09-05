@@ -1,24 +1,21 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { FaExternalLinkAlt, FaGithub, FaInfoCircle } from 'react-icons/fa';
 import { getTechIcon } from '../lib/techIcons';
 import type { Project } from '../lib/projects';
 
 type ProjectCardProps = {
   project: Project;
-  onOpen: (project: Project) => void;
 };
 
-export default function ProjectCard({ project, onOpen }: ProjectCardProps) {
+export default function ProjectCard({ project }: ProjectCardProps) {
+  const caseUrl = `/projects/${project.id}`;
+
   return (
     <article className="project-card reveal-on-scroll">
-      <button
-        type="button"
-        className="project-link"
-        onClick={() => onOpen(project)}
-        aria-label={`Открыть проект ${project.title}`}
-      >
+      <Link href={caseUrl} className="project-link" aria-label={`Открыть кейс ${project.title}`}>
         <Image
           src={project.image_url}
           alt={project.title}
@@ -27,7 +24,7 @@ export default function ProjectCard({ project, onOpen }: ProjectCardProps) {
           className="project-image"
           loading="lazy"
         />
-      </button>
+      </Link>
       <div className="project-details">
         <div className="icons">
           {project.tech.map((tech) => {
@@ -38,28 +35,20 @@ export default function ProjectCard({ project, onOpen }: ProjectCardProps) {
         <h3 className="project-tile">{project.title}</h3>
         <small>{project.tech.join(' · ')}</small>
         <p>{project.description}</p>
-        <div className="buttons buttons-three">
-          <a
-            href={project.repo_url}
-            target="_blank"
-            rel="noreferrer"
-            onClick={(event) => event.stopPropagation()}
-          >
+        <div className="buttons buttons-three buttons-aligned">
+          <a href={project.repo_url} target="_blank" rel="noreferrer">
             Исходный код <FaGithub />
           </a>
           {project.live_url ? (
-            <a
-              href={project.live_url}
-              target="_blank"
-              rel="noreferrer"
-              onClick={(event) => event.stopPropagation()}
-            >
-              Демо <FaExternalLinkAlt />
+            <a href={project.live_url} target="_blank" rel="noreferrer">
+              {project.live_label ?? 'Демо'} <FaExternalLinkAlt />
             </a>
-          ) : null}
-          <button type="button" className="project-open-btn" onClick={() => onOpen(project)}>
+          ) : (
+            <span className="project-btn-muted">Демо по запросу</span>
+          )}
+          <Link href={caseUrl} className="project-open-btn">
             Подробнее <FaInfoCircle />
-          </button>
+          </Link>
         </div>
       </div>
     </article>

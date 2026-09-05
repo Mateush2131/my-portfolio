@@ -13,21 +13,40 @@ export function useScrollEffects() {
 
     const onScroll = () => {
       const scrollPos = document.documentElement.scrollTop || document.body.scrollTop;
+      const viewport = window.innerHeight;
 
-      if (scrollPos <= window.innerHeight) {
+      if (scrollPos <= viewport) {
         if (forest) {
           forest.style.bottom = `${Math.floor(forestInitPos + scrollPos / 6)}px`;
         }
         if (silhouette) {
           silhouette.style.bottom = `${Math.floor(scrollPos / 6)}px`;
         }
-        if (moon) {
-          moon.style.transform = `translateY(${Math.floor(scrollPos / 8)}px)`;
+      }
+
+      if (moon) {
+        const fadeStart = viewport * 0.1;
+        const fadeEnd = viewport * 0.38;
+        const maxShift = viewport * 0.12;
+
+        if (scrollPos <= fadeStart) {
+          moon.style.opacity = '1';
+          moon.style.visibility = 'visible';
+          moon.style.transform = `translateY(${Math.floor(scrollPos / 12)}px)`;
+        } else if (scrollPos >= fadeEnd) {
+          moon.style.opacity = '0';
+          moon.style.visibility = 'hidden';
+          moon.style.transform = `translateY(${Math.floor(maxShift)}px)`;
+        } else {
+          const progress = (scrollPos - fadeStart) / (fadeEnd - fadeStart);
+          moon.style.opacity = String(1 - progress);
+          moon.style.visibility = 'visible';
+          moon.style.transform = `translateY(${Math.floor(maxShift * progress)}px)`;
         }
       }
 
       if (header) {
-        if (scrollPos - 100 <= window.innerHeight) {
+        if (scrollPos - 100 <= viewport) {
           header.style.visibility =
             header.style.visibility === 'hidden' ? 'visible' : header.style.visibility || 'visible';
         } else {
@@ -36,7 +55,7 @@ export function useScrollEffects() {
       }
 
       if (navbar) {
-        if (scrollPos + 100 >= window.innerHeight) {
+        if (scrollPos + 100 >= viewport) {
           navbar.classList.add('bg-active');
         } else {
           navbar.classList.remove('bg-active');

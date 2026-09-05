@@ -1,11 +1,13 @@
 'use client';
 
 import { FormEvent, useState } from 'react';
+import { parseJsonResponse } from '../lib/safeJson';
 import SocialLinks from './SocialLinks';
 
 const services = [
   'Telegram bot development',
   'Backend development',
+  'Разработка лендингов',
   'Другое',
 ];
 
@@ -42,11 +44,13 @@ export default function Contact() {
       });
 
       if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.error || 'Ошибка отправки');
+        const error = await parseJsonResponse<{ error?: string }>(response);
+        throw new Error(error?.error || `Ошибка отправки (${response.status})`);
       }
 
-      setStatus('✅ Заявка отправлена! Я свяжусь с вами.');
+      setStatus(
+        '✅ Заявка отправлена! Я свяжусь с вами. На всякий случай продублируйте заказ в личные сообщения Telegram (@Alakir_22) — из‑за блокировок уведомление может не дойти.'
+      );
       setForm({ name: '', email: '', phone: '', service: services[0], message: '' });
     } catch (err: any) {
       setStatus(`❌ Ошибка: ${err.message}. Попробуйте позже или напишите напрямую в Telegram.`);
@@ -56,7 +60,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact">
+    <section id="contact" className="site-section">
       <div className="container">
         <div className="heading-wrapper">
           <div className="heading reveal-on-scroll">

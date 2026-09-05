@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useCallback } from 'react';
+import { parseJsonResponse } from '../lib/safeJson';
 
 type Order = {
   id: number;
@@ -53,7 +54,8 @@ export default function AdminPanel() {
     try {
       const response = await fetch('/api/orders');
       if (!response.ok) throw new Error('Ошибка загрузки');
-      const data = await response.json();
+      const data = await parseJsonResponse<Order[]>(response);
+      if (!data) throw new Error('Пустой ответ сервера');
       setOrders(data);
       
       // Подсчёт статистики

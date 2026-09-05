@@ -3,3 +3,7 @@ node_modules
 out
 .env.local
 .DS_Store
+bot/.env
+bot/bot_data.db
+bot/__pycache__
+bot/**/__pycache__

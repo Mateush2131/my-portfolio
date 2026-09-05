@@ -1,3 +1,4 @@
+import BackgroundLayers from '../components/BackgroundLayers';
 import PortfolioApp from '../components/PortfolioApp';
 import { getProjects } from '../lib/projects';
 
@@ -6,6 +7,7 @@ export default async function HomePage() {
 
   return (
     <main>
+      <BackgroundLayers />
       <PortfolioApp projects={projects} />
     </main>
   );

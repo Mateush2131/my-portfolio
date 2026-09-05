@@ -9,7 +9,7 @@ export default function Hero() {
           <span className="line">
             Создаю <span className="color">Telegram-ботов</span>
           </span>
-          <span className="line">и backend-системы</span>
+          <span className="line">и fullstack проекты</span>
         </h1>
         <p className="hero-subtitle">
           Матвей, <span className="color">Python-разработчик</span> из Санкт-Петербурга

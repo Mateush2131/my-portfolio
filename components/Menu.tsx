@@ -9,9 +9,10 @@ type MenuProps = {
 };
 
 const menuItems = [
-  { label: 'ГЛАВНАЯ', href: '#welcome-section' },
-  { label: 'О СЕБЕ', href: '#about' },
-  { label: 'ПРОЕКТЫ', href: '#projects' },
+  { label: 'ОБО МНЕ', href: '#about' },
+  { label: 'НАВЫКИ', href: '#skills' },
+  { label: 'ПОРТФОЛИО', href: '#projects' },
+  { label: 'ОТЗЫВЫ', href: '#reviews' },
   { label: 'КОНТАКТЫ', href: '#contact' },
 ];
 

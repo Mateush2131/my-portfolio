@@ -9,6 +9,8 @@ import Footer from './Footer';
 import Hero from './Hero';
 import Navbar from './Navbar';
 import Projects from './Projects';
+import Reviews from './Reviews';
+import Skills from './Skills';
 
 type PortfolioAppProps = {
   projects: Project[];
@@ -22,8 +24,11 @@ export default function PortfolioApp({ projects }: PortfolioAppProps) {
     <>
       <Navbar />
       <Hero />
+      <div className="hero-about-divider" aria-hidden="true" />
       <About />
+      <Skills />
       <Projects projects={projects} />
+      <Reviews />
       <Contact />
       <Footer />
     </>

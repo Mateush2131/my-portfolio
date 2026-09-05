@@ -6,7 +6,18 @@ import {
   FaServer,
   FaTelegramPlane,
 } from 'react-icons/fa';
-import { SiDocker, SiDotnet, SiFastapi, SiPostgresql, SiRedis, SiSharp, SiSqlite } from 'react-icons/si';
+import {
+  SiDocker,
+  SiDotnet,
+  SiFastapi,
+  SiFramer,
+  SiNextdotjs,
+  SiPostgresql,
+  SiRedis,
+  SiSharp,
+  SiSqlite,
+  SiTailwindcss,
+} from 'react-icons/si';
 
 const techMap: Record<string, IconType> = {
   python: FaPython,
@@ -19,6 +30,13 @@ const techMap: Record<string, IconType> = {
   fastapi: SiFastapi,
   postgresql: SiPostgresql,
   postgres: SiPostgresql,
+  nextjs: SiNextdotjs,
+  next: SiNextdotjs,
+  tailwindcss: SiTailwindcss,
+  tailwind: SiTailwindcss,
+  'framer-motion': SiFramer,
+  framermotion: SiFramer,
+  framer: SiFramer,
   csharp: SiSharp,
   'c#': SiSharp,
   winforms: FaMicrosoft,
@@ -28,6 +46,6 @@ const techMap: Record<string, IconType> = {
 };
 
 export function getTechIcon(tech: string): IconType | null {
-  const key = tech.toLowerCase().replace(/\s+/g, '');
+  const key = tech.toLowerCase().replace(/\s+/g, '').replace(/\./g, '');
   return techMap[key] ?? null;
 }
